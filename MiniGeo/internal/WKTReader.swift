@@ -56,7 +56,7 @@ internal class WKTReader {
         
         // Polygon string is made of a sequence of coordinate sequences
         // Otherwise, we split the found group by ,
-        let coordinateSequences: [String] = matchGroups(string: polygon, by: "(\\(.*\\))[,]?[ ]*")
+        let coordinateSequences: [String] = match(string: polygon, by: "\\(([-+]?[0-9]*\\.?[0-9]+\\s[-+]?[0-9]*\\.?[0-9]+,?\\s?)+\\)")
         
         // If we have not matched at least one group, we deal with an empty polygon
         if coordinateSequences.isEmpty {
@@ -100,16 +100,18 @@ internal class WKTReader {
     }
     
     // "x y"
+    static let REGEX_COORDINATE: String = "[-+]?[0-9]*\\.?[0-9]+"
+    static let REGEX_COORDINATE_PAIR: String = "[-+]?[0-9]*\\.?[0-9]+[ ]+[-+]?[0-9]*\\.?[0-9]+"
     public func parseCoordinatePair(wktInput: String) -> Coordinate2D? {
         // Split string by any number of spaces in between
-        let tokens = split(string: wktInput, by: "[ ]+")
+        let groups = matchGroups(string: wktInput, by: "(^" + WKTReader.REGEX_COORDINATE + ")[ ]+(" + WKTReader.REGEX_COORDINATE + ")$")
         
-        if tokens.count != 2 {
+        if groups.count != 2 {
             // Invalid coordinate pair!
             return nil;
         }
         
-        if let x = Double(tokens[0]), let y = Double(tokens[1]) {
+        if let x = Double(groups[0]), let y = Double(groups[1]) {
             return Coordinate2D(x: x, y: y)
         } else {
             // Invalid coordinate value specified
