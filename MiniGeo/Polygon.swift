@@ -9,5 +9,12 @@
 import Foundation
 
 open class Polygon: Geometry {
+
+    public private(set) var exteriorRing: LinearRing?
+    public private(set) var interiorRings: [LinearRing]?
     
+    public init (exteriorRing: LinearRing?, interiorRings: [LinearRing]?) {
+        self.exteriorRing = exteriorRing
+        self.interiorRings = (interiorRings ?? []).isEmpty ? nil : interiorRings
+    }
 }
