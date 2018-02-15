@@ -15,7 +15,7 @@ internal class WKTReader {
     public func parse(wktString: String) -> Geometry? {
         // We match the string against any supported WKT type
         for supportedType in supportedWktTypes {
-            let pattern = String(format: "%@[ ]*(\\(.*\\))", supportedType)
+            let pattern = String(format: "^%@[ ]*(\\(.*\\))$", supportedType)
             let groups = self.matchGroups(string: wktString, by: pattern)
             
             // If we need to have matched at least one groups, or we are not dealing with the assumed type.
@@ -39,6 +39,41 @@ internal class WKTReader {
         
         // At this point, we have not found a supported WKT type.
         return nil
+    }
+    
+    // Parses the data structure of a MULTIPOLYGON element: "(POLYGON1, POLYGON2, ...)"
+    public func parseMultiPolygon(wktInput: String) -> MultiPolygon? {
+        var result: [Polygon] = []
+        
+        // Make sure, string is enclosed in a pair of parentheses
+        let groups = matchGroups(string: wktInput, by: "^\\((.*)\\)$")
+        
+        guard let multipolygon: String = groups.first else {
+            // Invalid Multipolygon
+            return nil
+        }
+        
+        // Match contained polygons
+        let polygons: [String] = match(string: multipolygon, by: "(\\(([-+]?[0-9]*\\.?[0-9]+\\s[-+]?[0-9]*\\.?[0-9]+,?\\s?)+\\),?\\s*)+")
+        
+        // If we did not match any groups, we are dealing with an empty multipolygon
+        if polygons.isEmpty {
+            return MultiPolygon(polygons: nil)
+        }
+        
+        // Otherwise we parse the POLYGON structures found
+        for polygon in polygons {
+            if let poly: Polygon = parsePolygon(wktInput: "(" + polygon + ")") {
+                // Valid polygon!
+                result.append(poly)
+            } else {
+                // Invalid Polygon!
+                return nil
+            }
+        }
+        
+        // We now construct a Multipolygon from the parsed polygons
+        return MultiPolygon(polygons: result)
     }
     
     // Parses the data structure of a POLYGON element: "(coordinate_sequence1, coordinate_sequence2, ...)"
@@ -93,10 +128,6 @@ internal class WKTReader {
         }
         
         return Polygon(exteriorRing: exteriorRing, interiorRings: interiorRings)
-    }
-    
-    public func parseMultiPolygon(wktInput: String) -> MultiPolygon? {
-        return nil
     }
     
     // "x y"

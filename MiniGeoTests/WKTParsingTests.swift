@@ -117,8 +117,23 @@ class WKTParsingTests: XCTestCase {
         XCTAssertNotNil(polygon2)
         XCTAssertNotNil(polygon2!.exteriorRing)
         XCTAssertNotNil(polygon2!.interiorRings)
-
+    }
+    
+    func testValidMultiPolygon() {
+        let multipolygon: MultiPolygon? = wktReader.parse(wktString: "MULTIPOLYGON (((40 40, 20 45, 45 30, 40 40)), ((20 35, 10 30, 10 10, 30 5, 45 20, 20 35), (30 20, 20 15, 20 25, 30 20)))") as? MultiPolygon
+        XCTAssertNotNil(multipolygon)
+        XCTAssertNotNil(multipolygon?.geometries)
+        XCTAssertTrue(multipolygon!.geometries!.count == 2)
         
+        let poly1 = multipolygon!.geometries![0] as! Polygon
+        let poly2 = multipolygon!.geometries![1] as! Polygon
+
+        XCTAssertTrue(poly1.exteriorRing!.coordinates.count == 4)
+        XCTAssertNil(poly1.interiorRings)
+
+        XCTAssertTrue(poly2.exteriorRing!.coordinates.count == 6)
+        XCTAssertNotNil(poly2.interiorRings)
+        XCTAssertTrue(poly2.interiorRings!.count == 1)
     }
     
 }
