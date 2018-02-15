@@ -56,7 +56,7 @@ internal class WKTReader {
         
         // Polygon string is made of a sequence of coordinate sequences
         // Otherwise, we split the found group by ,
-        let coordinateSequences: [String] = match(string: polygon, by: "\\(([-+]?[0-9]*\\.?[0-9]+\\s[-+]?[0-9]*\\.?[0-9]+,?\\s?)+\\)")
+        let coordinateSequences: [String] = match(string: polygon, by: "\\(([-+]?[0-9]*\\.?[0-9]+\\s+[-+]?[0-9]*\\.?[0-9]+,?\\s*)+\\)")
         
         // If we have not matched at least one group, we deal with an empty polygon
         if coordinateSequences.isEmpty {
