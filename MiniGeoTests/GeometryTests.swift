@@ -42,6 +42,9 @@ class GeometryTests: XCTestCase {
         
         let notContained = ring.contains(coordinate: Coordinate2D(x: 1, y: 15))
         XCTAssertFalse(notContained)
+        
+        // Centroid should be within polygon
+        XCTAssertTrue(ring.contains(coordinate: centroid))
     }
     
     func testLinearRingClosing() {
@@ -95,6 +98,9 @@ class GeometryTests: XCTestCase {
         
         let notContained = polygon.contains(coordinate: Coordinate2D(x: 1, y: 15))
         XCTAssertFalse(notContained)
+        
+        // Centroid should be within polygon
+        XCTAssertTrue(polygon.contains(coordinate: centroid))
     }
     
     func testSimpleMultiPolygon() {
@@ -123,6 +129,9 @@ class GeometryTests: XCTestCase {
         
         let notContained = multiPolygon.contains(coordinate: Coordinate2D(x: 1, y: 15))
         XCTAssertFalse(notContained)
+        
+        // Centroid should be within multi polygon
+        XCTAssertTrue(multiPolygon.contains(coordinate: centroid))
     }
     
 }
