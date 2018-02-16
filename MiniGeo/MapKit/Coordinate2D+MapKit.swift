@@ -20,4 +20,9 @@ public extension Coordinate2D {
         return MKMapPointForCoordinate(coreLocationCoordinate())
     }
     
+    // Checks whether this coordinate is equal to the specified Mapkit point
+    public func equals(mapkitPoint: MKMapPoint) -> Bool {
+        return self.equals(coordinate: Coordinate2D(mapkitPoint: mapkitPoint))
+    }
+    
 }

@@ -7,6 +7,8 @@
 //
 
 import XCTest
+import CoreLocation
+import MapKit
 @testable import MiniGeo
 
 class GeometryTests: XCTestCase {
@@ -50,6 +52,27 @@ class GeometryTests: XCTestCase {
         // Initialized ring should be closed now (i.e. the first coordinate should be added as last coordinate)
         XCTAssertTrue(ring.coordinates.count == 4)
         XCTAssertTrue(ring.coordinates.first!.equals(coordinate: ring.coordinates.last!))
+    }
+    
+    func testEqualityOperators() {
+        let coordinate1: Coordinate2D = Coordinate2D(x: 42.0, y: 44.0)
+        let coordinate2: Coordinate2D = Coordinate2D(x: 42.0, y: 44.0)
+        let coordinate3: Coordinate2D = Coordinate2D(x: 12.0, y: 17.0)
+        
+        XCTAssertTrue(coordinate1.equals(coordinate: coordinate2))
+        XCTAssertFalse(coordinate1.equals(coordinate: coordinate3))
+        
+        let coreLocationCoordinate1: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 44.0, longitude: 42.0)
+        let coreLocationCoordinate2: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 17.0, longitude: 12.0)
+        
+        XCTAssertTrue(coordinate1.equals(coreLocationCoordinate: coreLocationCoordinate1))
+        XCTAssertFalse(coordinate1.equals(coreLocationCoordinate: coreLocationCoordinate2))
+
+        let mapkitPoint1: MKMapPoint = MKMapPointForCoordinate(coreLocationCoordinate1)
+        let mapkitPoint2: MKMapPoint = MKMapPointForCoordinate(coreLocationCoordinate2)
+        
+        XCTAssertTrue(coordinate1.equals(mapkitPoint: mapkitPoint1))
+        XCTAssertFalse(coordinate1.equals(mapkitPoint: mapkitPoint2))
     }
     
     func testSimplePolygon() {
