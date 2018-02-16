@@ -8,7 +8,7 @@
 
 import Foundation
 
-open class LinearRing: Geometry {
+open class LinearRing: Geometry, PlanarGeometry {
     public private(set) var coordinates: [Coordinate2D]
     
     public init(coordinates: [Coordinate2D]) {
@@ -42,6 +42,71 @@ open class LinearRing: Geometry {
     
     open override func area() -> Double {
         return fabs(signedArea())
+    }
+    
+    open override func envelope() -> (Coordinate2D, Coordinate2D) {
+        var minX: Double = 100000.0
+        var minY: Double = 100000.0
+        var maxX: Double = -100000.0
+        var maxY: Double = -100000.0
+        
+        for coordinate in coordinates {
+            if coordinate.x < minX {
+                minX = coordinate.x
+            }
+            if coordinate.x > maxX {
+                maxX = coordinate.x
+            }
+            if coordinate.y < minY {
+                minY = coordinate.y
+            }
+            if coordinate.y > maxY {
+                maxY = coordinate.y
+            }
+        }
+        
+        return (Coordinate2D(x: minX, y: maxY), Coordinate2D(x: maxX, y: minY))
+    }
+    
+    public func contains(coordinate: Coordinate2D) -> Bool {
+        // The coordinate is considered to be within this geometry, if ALL of the
+        // following conditions are met:
+        // (1) The coordinate is within the bounding box (envelope) of this geometry
+        let envelopeBox = envelope()
+        
+        if coordinate.x < envelopeBox.0.x || coordinate.x > envelopeBox.1.x {
+            return false
+        }
+        
+        if coordinate.y < envelopeBox.1.y || coordinate.y > envelopeBox.0.y {
+            return false
+        }
+        
+        // (2) The coordinate is within the ring
+        // Implementation of this test is taken from
+        // https://www.ecse.rpi.edu/Homepages/wrf/Research/Short_Notes/pnpoly.html
+        let nvert: Int = coordinates.count - 1 // Last coordinate duplicates first!
+        var i: Int = 0
+        var j: Int = nvert - 1
+        var c: Bool = false
+        
+        while i < nvert {
+            let vertex1: Coordinate2D = coordinates[i]
+            let vertex2: Coordinate2D = coordinates[j]
+            
+            if ((vertex1.y > coordinate.y) != (vertex2.y > coordinate.y)) {
+                if (coordinate.x < ((vertex2.x - vertex1.x) * (coordinate.y - vertex1.y) /
+                    (vertex2.y - vertex1.y) + vertex1.x)) {
+                    c = !c
+                }
+            }
+            
+            // Advance to next loop iteration
+            j = i
+            i = i + 1
+        }
+        
+        return c
     }
     
     private func signedArea() -> Double {

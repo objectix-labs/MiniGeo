@@ -33,6 +33,13 @@ class GeometryTests: XCTestCase {
         let centroid = ring.centroid()
         XCTAssertTrue(centroid.x == 10.0)
         XCTAssertEqual(centroid.y, 6.667, accuracy: 0.001, "Y coordinate of centroid must match")
+        
+        // Test point in polygon
+        let contained = ring.contains(coordinate: Coordinate2D(x: 5, y: 5))
+        XCTAssertTrue(contained)
+        
+        let notContained = ring.contains(coordinate: Coordinate2D(x: 1, y: 15))
+        XCTAssertFalse(notContained)
     }
     
     func testSimplePolygon() {
@@ -48,6 +55,13 @@ class GeometryTests: XCTestCase {
         let centroid = polygon.centroid()
         XCTAssertTrue(centroid.x == 10.0)
         XCTAssertEqual(centroid.y, 6.667, accuracy: 0.001, "Y coordinate of centroid must match")
+        
+        // Test point in polygon
+        let contained = polygon.contains(coordinate: Coordinate2D(x: 5, y: 5))
+        XCTAssertTrue(contained)
+        
+        let notContained = polygon.contains(coordinate: Coordinate2D(x: 1, y: 15))
+        XCTAssertFalse(notContained)
     }
     
     func testSimpleMultiPolygon() {
@@ -69,6 +83,13 @@ class GeometryTests: XCTestCase {
         let centroid = multiPolygon.centroid()
         XCTAssertEqual(centroid.x, 0, accuracy: 0.001, "X coordinate of centroid must match")
         XCTAssertEqual(centroid.y, 0, accuracy: 0.001, "Y coordinate of centroid must match")
+        
+        // Test point in polygon
+        let contained = multiPolygon.contains(coordinate: Coordinate2D(x: 5, y: 5))
+        XCTAssertTrue(contained)
+        
+        let notContained = multiPolygon.contains(coordinate: Coordinate2D(x: 1, y: 15))
+        XCTAssertFalse(notContained)
     }
     
 }
