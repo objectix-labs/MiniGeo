@@ -2,7 +2,10 @@
 
 ### A simple Swift framework for dealing with geographic objects and functions on iOS.
 
-[![Build Status](https://travis-ci.org/objectix-labs/MiniGeo.svg?branch=develop)](https://travis-ci.org/objectix-labs/MiniGeo) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Build Status](https://travis-ci.org/objectix-labs/MiniGeo.svg?branch=develop)](https://travis-ci.org/objectix-labs/MiniGeo)
+![platform](https://img.shields.io/badge/platform-iOS-lightgray.svg)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Features (work-in-progress)
 **Please note that this framework is very much early stage and work in progress. It is developed driven by our project requirements and needs, and while in ALPHA its API may change and break any time. Please use with caution.**
