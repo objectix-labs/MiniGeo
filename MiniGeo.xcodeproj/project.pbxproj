@@ -10,6 +10,20 @@
 		83EC21272035CA62002AA249 /* MiniGeo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83EC211D2035CA62002AA249 /* MiniGeo.framework */; };
 		83EC212C2035CA62002AA249 /* MiniGeoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EC212B2035CA62002AA249 /* MiniGeoTests.swift */; };
 		83EC212E2035CA62002AA249 /* MiniGeo.h in Headers */ = {isa = PBXBuildFile; fileRef = 83EC21202035CA62002AA249 /* MiniGeo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		83EC21382035CCB6002AA249 /* Geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EC21372035CCB6002AA249 /* Geometry.swift */; };
+		83EC213B2035CD20002AA249 /* WKTReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EC213A2035CD20002AA249 /* WKTReader.swift */; };
+		83EC213D2035CE45002AA249 /* Polygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EC213C2035CE45002AA249 /* Polygon.swift */; };
+		83EC213F2035CE5D002AA249 /* MultiPolygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EC213E2035CE5D002AA249 /* MultiPolygon.swift */; };
+		83EC21412035CE9E002AA249 /* GeometryCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EC21402035CE9E002AA249 /* GeometryCollection.swift */; };
+		83EC21452035D351002AA249 /* Coordinate2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EC21442035D351002AA249 /* Coordinate2D.swift */; };
+		83EC21472035D431002AA249 /* LinearRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EC21462035D431002AA249 /* LinearRing.swift */; };
+		83EC21492035DB07002AA249 /* WKTParsingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EC21482035DB07002AA249 /* WKTParsingTests.swift */; };
+		83EC214B2036D94E002AA249 /* GeometryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EC214A2036D94E002AA249 /* GeometryTests.swift */; };
+		83EC214E2036FA64002AA249 /* LinearRing+MapKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EC214D2036FA64002AA249 /* LinearRing+MapKit.swift */; };
+		83EC215020372C41002AA249 /* Coordinate2D+MapKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EC214F20372C41002AA249 /* Coordinate2D+MapKit.swift */; };
+		83EC215220372D4F002AA249 /* Polygon+MapKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EC215120372D4F002AA249 /* Polygon+MapKit.swift */; };
+		83EC215420372F61002AA249 /* MultiPolygon+MapKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EC215320372F61002AA249 /* MultiPolygon+MapKit.swift */; };
+		83EC21572037310E002AA249 /* Coordinate2D+CoreLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EC21562037310E002AA249 /* Coordinate2D+CoreLocation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +43,20 @@
 		83EC21262035CA62002AA249 /* MiniGeoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MiniGeoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		83EC212B2035CA62002AA249 /* MiniGeoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniGeoTests.swift; sourceTree = "<group>"; };
 		83EC212D2035CA62002AA249 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		83EC21372035CCB6002AA249 /* Geometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geometry.swift; sourceTree = "<group>"; };
+		83EC213A2035CD20002AA249 /* WKTReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKTReader.swift; sourceTree = "<group>"; };
+		83EC213C2035CE45002AA249 /* Polygon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Polygon.swift; sourceTree = "<group>"; };
+		83EC213E2035CE5D002AA249 /* MultiPolygon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPolygon.swift; sourceTree = "<group>"; };
+		83EC21402035CE9E002AA249 /* GeometryCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryCollection.swift; sourceTree = "<group>"; };
+		83EC21442035D351002AA249 /* Coordinate2D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinate2D.swift; sourceTree = "<group>"; };
+		83EC21462035D431002AA249 /* LinearRing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearRing.swift; sourceTree = "<group>"; };
+		83EC21482035DB07002AA249 /* WKTParsingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKTParsingTests.swift; sourceTree = "<group>"; };
+		83EC214A2036D94E002AA249 /* GeometryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryTests.swift; sourceTree = "<group>"; };
+		83EC214D2036FA64002AA249 /* LinearRing+MapKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LinearRing+MapKit.swift"; sourceTree = "<group>"; };
+		83EC214F20372C41002AA249 /* Coordinate2D+MapKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Coordinate2D+MapKit.swift"; sourceTree = "<group>"; };
+		83EC215120372D4F002AA249 /* Polygon+MapKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Polygon+MapKit.swift"; sourceTree = "<group>"; };
+		83EC215320372F61002AA249 /* MultiPolygon+MapKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MultiPolygon+MapKit.swift"; sourceTree = "<group>"; };
+		83EC21562037310E002AA249 /* Coordinate2D+CoreLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Coordinate2D+CoreLocation.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,8 +99,17 @@
 		83EC211F2035CA62002AA249 /* MiniGeo */ = {
 			isa = PBXGroup;
 			children = (
+				83EC2155203730ED002AA249 /* CoreLocation */,
+				83EC214C2036FA16002AA249 /* MapKit */,
+				83EC21392035CCF8002AA249 /* internal */,
 				83EC21202035CA62002AA249 /* MiniGeo.h */,
 				83EC21212035CA62002AA249 /* Info.plist */,
+				83EC21372035CCB6002AA249 /* Geometry.swift */,
+				83EC213C2035CE45002AA249 /* Polygon.swift */,
+				83EC213E2035CE5D002AA249 /* MultiPolygon.swift */,
+				83EC21402035CE9E002AA249 /* GeometryCollection.swift */,
+				83EC21442035D351002AA249 /* Coordinate2D.swift */,
+				83EC21462035D431002AA249 /* LinearRing.swift */,
 			);
 			path = MiniGeo;
 			sourceTree = "<group>";
@@ -82,8 +119,37 @@
 			children = (
 				83EC212B2035CA62002AA249 /* MiniGeoTests.swift */,
 				83EC212D2035CA62002AA249 /* Info.plist */,
+				83EC21482035DB07002AA249 /* WKTParsingTests.swift */,
+				83EC214A2036D94E002AA249 /* GeometryTests.swift */,
 			);
 			path = MiniGeoTests;
+			sourceTree = "<group>";
+		};
+		83EC21392035CCF8002AA249 /* internal */ = {
+			isa = PBXGroup;
+			children = (
+				83EC213A2035CD20002AA249 /* WKTReader.swift */,
+			);
+			path = internal;
+			sourceTree = "<group>";
+		};
+		83EC214C2036FA16002AA249 /* MapKit */ = {
+			isa = PBXGroup;
+			children = (
+				83EC214D2036FA64002AA249 /* LinearRing+MapKit.swift */,
+				83EC214F20372C41002AA249 /* Coordinate2D+MapKit.swift */,
+				83EC215120372D4F002AA249 /* Polygon+MapKit.swift */,
+				83EC215320372F61002AA249 /* MultiPolygon+MapKit.swift */,
+			);
+			path = MapKit;
+			sourceTree = "<group>";
+		};
+		83EC2155203730ED002AA249 /* CoreLocation */ = {
+			isa = PBXGroup;
+			children = (
+				83EC21562037310E002AA249 /* Coordinate2D+CoreLocation.swift */,
+			);
+			path = CoreLocation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,6 +214,7 @@
 				TargetAttributes = {
 					83EC211C2035CA62002AA249 = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 					83EC21252035CA62002AA249 = {
@@ -196,6 +263,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83EC215220372D4F002AA249 /* Polygon+MapKit.swift in Sources */,
+				83EC213F2035CE5D002AA249 /* MultiPolygon.swift in Sources */,
+				83EC21382035CCB6002AA249 /* Geometry.swift in Sources */,
+				83EC213B2035CD20002AA249 /* WKTReader.swift in Sources */,
+				83EC21412035CE9E002AA249 /* GeometryCollection.swift in Sources */,
+				83EC21572037310E002AA249 /* Coordinate2D+CoreLocation.swift in Sources */,
+				83EC213D2035CE45002AA249 /* Polygon.swift in Sources */,
+				83EC21452035D351002AA249 /* Coordinate2D.swift in Sources */,
+				83EC214E2036FA64002AA249 /* LinearRing+MapKit.swift in Sources */,
+				83EC21472035D431002AA249 /* LinearRing.swift in Sources */,
+				83EC215420372F61002AA249 /* MultiPolygon+MapKit.swift in Sources */,
+				83EC215020372C41002AA249 /* Coordinate2D+MapKit.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,6 +283,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				83EC212C2035CA62002AA249 /* MiniGeoTests.swift in Sources */,
+				83EC214B2036D94E002AA249 /* GeometryTests.swift in Sources */,
+				83EC21492035DB07002AA249 /* WKTParsingTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,6 +415,7 @@
 		83EC21322035CA62002AA249 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -348,6 +430,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = de.objectix.MiniGeo;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -356,6 +439,7 @@
 		83EC21332035CA62002AA249 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -378,6 +462,7 @@
 		83EC21352035CA62002AA249 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = US2X6XP73G;
 				INFOPLIST_FILE = MiniGeoTests/Info.plist;
@@ -392,6 +477,7 @@
 		83EC21362035CA62002AA249 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = US2X6XP73G;
 				INFOPLIST_FILE = MiniGeoTests/Info.plist;
