@@ -23,6 +23,7 @@
 		83EC215020372C41002AA249 /* Coordinate2D+MapKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EC214F20372C41002AA249 /* Coordinate2D+MapKit.swift */; };
 		83EC215220372D4F002AA249 /* Polygon+MapKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EC215120372D4F002AA249 /* Polygon+MapKit.swift */; };
 		83EC215420372F61002AA249 /* MultiPolygon+MapKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EC215320372F61002AA249 /* MultiPolygon+MapKit.swift */; };
+		83EC21572037310E002AA249 /* Coordinate2D+CoreLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EC21562037310E002AA249 /* Coordinate2D+CoreLocation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		83EC214F20372C41002AA249 /* Coordinate2D+MapKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Coordinate2D+MapKit.swift"; sourceTree = "<group>"; };
 		83EC215120372D4F002AA249 /* Polygon+MapKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Polygon+MapKit.swift"; sourceTree = "<group>"; };
 		83EC215320372F61002AA249 /* MultiPolygon+MapKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MultiPolygon+MapKit.swift"; sourceTree = "<group>"; };
+		83EC21562037310E002AA249 /* Coordinate2D+CoreLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Coordinate2D+CoreLocation.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 		83EC211F2035CA62002AA249 /* MiniGeo */ = {
 			isa = PBXGroup;
 			children = (
+				83EC2155203730ED002AA249 /* CoreLocation */,
 				83EC214C2036FA16002AA249 /* MapKit */,
 				83EC21392035CCF8002AA249 /* internal */,
 				83EC21202035CA62002AA249 /* MiniGeo.h */,
@@ -139,6 +142,14 @@
 				83EC215320372F61002AA249 /* MultiPolygon+MapKit.swift */,
 			);
 			path = MapKit;
+			sourceTree = "<group>";
+		};
+		83EC2155203730ED002AA249 /* CoreLocation */ = {
+			isa = PBXGroup;
+			children = (
+				83EC21562037310E002AA249 /* Coordinate2D+CoreLocation.swift */,
+			);
+			path = CoreLocation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,6 +268,7 @@
 				83EC21382035CCB6002AA249 /* Geometry.swift in Sources */,
 				83EC213B2035CD20002AA249 /* WKTReader.swift in Sources */,
 				83EC21412035CE9E002AA249 /* GeometryCollection.swift in Sources */,
+				83EC21572037310E002AA249 /* Coordinate2D+CoreLocation.swift in Sources */,
 				83EC213D2035CE45002AA249 /* Polygon.swift in Sources */,
 				83EC21452035D351002AA249 /* Coordinate2D.swift in Sources */,
 				83EC214E2036FA64002AA249 /* LinearRing+MapKit.swift in Sources */,

@@ -9,9 +9,24 @@
 import Foundation
 import MapKit
 
-extension Polygon {
+public extension Polygon {
     
-    open func mapkitPolygon() -> MKPolygon {
+    // Initialized Polygon from MKPolygon (sets exterior polygon only)
+    public convenience init(mapkitPolygon: MKPolygon) {
+        self.init(exteriorRing: LinearRing(mapkitPolygon: mapkitPolygon), interiorRings: nil)
+    }
+    
+    // Initializes Polygon from MKPolygons.
+    public convenience init(exteriorMapkitPolygon: MKPolygon, interiorMapkitPolygons: [MKPolygon]?) {
+        let exteriorRing: LinearRing = LinearRing(mapkitPolygon: exteriorMapkitPolygon)
+        let interiorRings: [LinearRing]? = interiorMapkitPolygons?.map({ (mapkitPolygon) -> LinearRing in
+            return LinearRing(mapkitPolygon: mapkitPolygon)
+        })
+        
+        self.init(exteriorRing: exteriorRing, interiorRings: interiorRings)
+    }
+    
+    public func mapkitPolygon() -> MKPolygon {
         // Exterior polygon
         let exteriorPoints: [MKMapPoint] = exteriorRing.mapkitPoints()
         
