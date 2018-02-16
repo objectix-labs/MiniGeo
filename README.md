@@ -1,6 +1,6 @@
 # MiniGeo
 
-### A simple Swift framework for dealing with geographic objects and functions.
+### A simple Swift framework for dealing with geographic objects and functions on iOS.
 
 ## Features (work-in-progress)
 **Please note that this framework is very much early stage and work in progress. It is developed driven by our project requirements and needs, and while in ALPHA its API may change and break any time. Please use with caution.**
@@ -19,8 +19,9 @@
 
 ## System Requirements
 * XCode 9+
-* Swift 4.1
+* Swift 4.1+
 * Carthage
+* iOS 9.0+
 
 ## Installation
 Please add the framework via your `Cartfile`:
@@ -59,8 +60,10 @@ if let polygon = Geometry.create(fromWKT: wktString) as? Polygon {
 
 Please also refer to the unit tests for further example on how to use this framework.
 
-## Todos
-* Support for more Geometries (eg. Point, LineString, ...)
+## Todos (in no particular order)
+* support for additional Geometries (eg. Point, LineString, ...)
 * more geometric operations (e.g. polygon buffering, convex hull, ...)
 * more tests
 * performance improvements in WKT parsing
+* support for WKB (binary version of WKT)
+* support for macOS
