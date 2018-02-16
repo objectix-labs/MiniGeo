@@ -58,9 +58,9 @@ class WKTParsingTests: XCTestCase {
         XCTAssertTrue(coordinate!.x == 32.12)
         XCTAssertTrue(coordinate!.y == 64.14)
         
-        let coordinate2: Coordinate2D? = wktReader.parseCoordinatePair(wktInput: "32.12    64.14")
+        let coordinate2: Coordinate2D? = wktReader.parseCoordinatePair(wktInput: "-32.12    64.14")
         XCTAssertNotNil(coordinate2)
-        XCTAssertTrue(coordinate2!.x == 32.12)
+        XCTAssertTrue(coordinate2!.x == -32.12)
         XCTAssertTrue(coordinate2!.y == 64.14)
     }
     
