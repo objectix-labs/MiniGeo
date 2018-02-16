@@ -1,4 +1,4 @@
 language: objective-c
 xcode_project: MiniGeo.xcodeproj
-xcode_scheme: MiniGeoTests
+xcode_scheme: MiniGeo
 osx_image: xcode9.2
