@@ -9,7 +9,7 @@
 import Foundation
 
 open class MultiPolygon: GeometryCollection {
-    public init(polygons: [Polygon]?) {
+    public init(polygons: [Polygon]) {
         super.init(geometries: polygons)
     }
 }

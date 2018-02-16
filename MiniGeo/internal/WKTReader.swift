@@ -56,9 +56,9 @@ internal class WKTReader {
         // Match contained polygons
         let polygons: [String] = match(string: multipolygon, by: "(?:\\((?:[-+]?[0-9]*\\.?[0-9]+\\s+[-+]?[0-9]*\\.?[0-9]+,?\\s?)+\\),?\\s*)+")
         
-        // If we did not match any groups, we are dealing with an empty multipolygon
+        // If we did not match any groups, we are dealing with an empty multipolygon, which is now allowed
         if polygons.isEmpty {
-            return MultiPolygon(polygons: nil)
+            return nil
         }
         
         // Otherwise we parse the POLYGON structures found
@@ -93,9 +93,9 @@ internal class WKTReader {
         // Otherwise, we split the found group by ,
         let coordinateSequences: [String] = match(string: polygon, by: "\\((?:[-+]?[0-9]*\\.?[0-9]+\\s+[-+]?[0-9]*\\.?[0-9]+,?\\s*)+\\)")
         
-        // If we have not matched at least one group, we deal with an empty polygon
+        // If we have not matched at least one group, we deal with an empty polygon, which is not allowed
         if coordinateSequences.isEmpty {
-            return Polygon(exteriorRing: nil, interiorRings: nil)
+            return nil
         }
         
         // Iterate through coordinate sequences
@@ -108,16 +108,17 @@ internal class WKTReader {
             }
         }
         
+        // If we have not at least one result, we cannot construct a valid polygon.
+        if result.isEmpty {
+            return nil
+        }
+        
         // We now construct a Polygon geometry from the collected coordinate sequences.
         
         // The first detected coordinate sequence becomes the Polygon's exterior ring. Any following
         // coordinate sequende is made an interior ring.
-        var exteriorRing: LinearRing?
+        let exteriorRing: LinearRing = LinearRing(coordinates: result.removeFirst())
         var interiorRings: [LinearRing]?
-        
-        if result.count > 0 {
-            exteriorRing = LinearRing(coordinates: result.removeFirst())
-        }
         
         if result.count > 0 {
             interiorRings = [];
