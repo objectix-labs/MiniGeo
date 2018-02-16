@@ -2,3 +2,5 @@ language: objective-c
 xcode_project: MiniGeo.xcodeproj
 xcode_scheme: MiniGeo
 osx_image: xcode9.2
+script:
+    - xcodebuild clean test -project MiniGeo.xcodeproj -scheme MiniGeo -destination "platform=iOS Simulator,name=iPhone 8,OS=11.2" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO -quiet
