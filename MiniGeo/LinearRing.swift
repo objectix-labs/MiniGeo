@@ -40,7 +40,7 @@ open class LinearRing: Geometry, PlanarGeometry {
         return Coordinate2D(x: cx, y: cy)
     }
     
-    open override func area() -> Double {
+    open func area() -> Double {
         return fabs(signedArea())
     }
     

@@ -18,6 +18,7 @@ Please note that this framework is very much early stage and work in progress. I
 ## System Requirements
 * XCode 9+
 * Swift 4.1
+* Carthage
 
 ## Installation
 Please add the framework via your `Cartfile`.

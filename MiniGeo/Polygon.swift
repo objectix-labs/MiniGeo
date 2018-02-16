@@ -18,7 +18,7 @@ open class Polygon: Geometry, PlanarGeometry {
         self.interiorRings = (interiorRings ?? []).isEmpty ? nil : interiorRings
     }
     
-    open override func area() -> Double {
+    open func area() -> Double {
         // The area of a polygon is the area of the exterior ring subtracted by the areas of the
         // interior rings (which represent holes in the polygon by definition)
         let exteriorArea = exteriorRing.area()

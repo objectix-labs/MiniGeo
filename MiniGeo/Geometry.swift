@@ -14,23 +14,21 @@ public protocol PlanarGeometry {
     // Tests, whether the specifiec coordinates is within the bounds of the geometry.
     func contains(coordinate: Coordinate2D) -> Bool
     
+    // Calculates the absolute area for this Geometry. This is 0 for all geometries besides Polygon, MultiPolygon and LinearRing.
+    func area() -> Double
 }
 
 open class Geometry {
     
-    // Creates a Geometry from the specified WKT string.
-    open class func create(wktCoordinateString: String) -> Geometry? {
-        return nil
+    // Creates a Geometry instance from the specified WKT string. Returns nil, if WKT string could not be parsed successfully.
+    open class func create(fromWKT input: String) -> Geometry? {
+        let wktReader: WKTReader = WKTReader()
+        return wktReader.parse(wktString: input)
     }
     
     // Calculates the centroid for this Geometry.
     open func centroid() -> Coordinate2D {
         fatalError("centroid() on Geometry is not implemented. Call subclass implementation instead.")
-    }
-    
-    // Calculates the absolute area for this Geometry. This is 0 for all geometries besides Polygon, MultiPolygon and LinearRing.
-    open func area() -> Double {
-        return 0
     }
     
     // Calculates the bounding box (envelope) of the geometry. Returned tuple is (topLeftCoordinate, bottomRightCoordinate).

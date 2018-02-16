@@ -13,6 +13,33 @@ open class MultiPolygon: GeometryCollection, PlanarGeometry {
         super.init(geometries: polygons)
     }
     
+    open func area() -> Double {
+        // The area of a GeometryCollection is the sum of the areas of the contained geometries
+        var totalArea: Double = 0.0
+        
+        for geometry in geometries {
+            totalArea += (geometry as! Polygon).area()
+        }
+        
+        return totalArea
+    }
+    
+    open override func centroid() -> Coordinate2D {
+        // The centroid of a GeometryCollection is defined as the average across all centroids of the contained geometries
+        var sumx: Double = 0.0
+        var sumy: Double = 0.0
+        var nrCentroids: Double = 0.0
+        
+        for geometry in geometries {
+            let centroid: Coordinate2D = geometry.centroid()
+            sumx += centroid.x
+            sumy += centroid.y
+            nrCentroids += 1.0
+        }
+        
+        return Coordinate2D(x: sumx / nrCentroids, y: sumy / nrCentroids)
+    }
+    
     open override func envelope() -> (Coordinate2D, Coordinate2D) {
         // Envelope is defined by the envelopes of the contained polygons.
         var minX: Double = 100000.0
