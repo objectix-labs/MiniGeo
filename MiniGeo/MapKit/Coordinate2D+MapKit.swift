@@ -7,14 +7,17 @@
 //
 
 import Foundation
-import CoreLocation
 import MapKit
 
-extension Coordinate2D {
+public extension Coordinate2D {
+    
+    public convenience init(mapkitPoint: MKMapPoint) {
+        self.init(coreLocationCoordinate: MKCoordinateForMapPoint(mapkitPoint))
+    }
     
     // Returns a MapKit Point for the given coordinate
-    open func mapkitPoint() -> MKMapPoint {
-        return MKMapPointForCoordinate(CLLocationCoordinate2D(latitude: y, longitude: x))
+    public func mapkitPoint() -> MKMapPoint {
+        return MKMapPointForCoordinate(coreLocationCoordinate())
     }
     
 }

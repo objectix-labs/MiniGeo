@@ -42,6 +42,16 @@ class GeometryTests: XCTestCase {
         XCTAssertFalse(notContained)
     }
     
+    func testLinearRingClosing() {
+        // Linear rings must be always closed. If initialized with unclosed coordinate sequence, the linear ring should close itself upon initialization.
+        let points: [Coordinate2D] = [Coordinate2D(x: 0, y: 0), Coordinate2D(x: 10, y: 20), Coordinate2D(x: 20, y: 0)]
+        let ring: LinearRing = LinearRing(coordinates: points)
+        
+        // Initialized ring should be closed now (i.e. the first coordinate should be added as last coordinate)
+        XCTAssertTrue(ring.coordinates.count == 4)
+        XCTAssertTrue(ring.coordinates.first!.equals(coordinate: ring.coordinates.last!))
+    }
+    
     func testSimplePolygon() {
         let points: [Coordinate2D] = [Coordinate2D(x: 0, y: 0), Coordinate2D(x: 10, y: 20), Coordinate2D(x: 20, y: 0), Coordinate2D(x: 0, y: 0)]
         let ring: LinearRing = LinearRing(coordinates: points)

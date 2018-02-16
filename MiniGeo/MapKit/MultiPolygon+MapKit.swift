@@ -9,9 +9,18 @@
 import Foundation
 import MapKit
 
-extension MultiPolygon {
+public extension MultiPolygon {
     
-    open func mapkitPolygons() -> [MKPolygon] {
+    // Initializes MultiPolygon from a list of polygons.
+    public convenience init(mapkitPolygons: [MKPolygon]) {
+        assert(!mapkitPolygons.isEmpty)
+        
+        self.init(polygons: mapkitPolygons.map({ (mapkitPolygon) -> Polygon in
+            return Polygon(mapkitPolygon: mapkitPolygon)
+        }))
+    }
+    
+    public func mapkitPolygons() -> [MKPolygon] {
         return geometries.map({ (geometry) -> MKPolygon in
             return (geometry as! Polygon).mapkitPolygon()
         })

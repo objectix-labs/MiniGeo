@@ -12,7 +12,17 @@ open class LinearRing: Geometry, PlanarGeometry {
     public private(set) var coordinates: [Coordinate2D]
     
     public init(coordinates: [Coordinate2D]) {
+        // At least three coordinates must have been specified
+        assert(coordinates.count > 2)
+        
         self.coordinates = coordinates
+        
+        // A Linear Ring must always meet the following constraint: the first and the last coordinate in its sequernce must be equal to make it closed.
+        // Otherwise, it would be just a polyline.
+        if let first = coordinates.first, let last = coordinates.last, !first.equals(coordinate: last) {
+            // The first and the last coordinate are not equal -> add first coordinate as last one
+            self.coordinates.append(first)
+        }
     }
     
     open override func centroid() -> Coordinate2D {

@@ -16,4 +16,9 @@ open class Coordinate2D {
         self.x = x;
         self.y = y;
     }
+    
+    // Checks, whether this coordinate is equal to the specified coordinate.
+    public func equals(coordinate: Coordinate2D) -> Bool {
+        return x == coordinate.x && y == coordinate.y
+    }
 }
