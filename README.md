@@ -49,15 +49,15 @@ import MiniGeo
 let wktString = "POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))"
 if let polygon = Geometry.create(fromWKT: wktString) as? Polygon {
     // Do some stuff with polygon
-    print(polygon.area())
-    print(polygon.envelope())
+    print(polygon.area)
+    print(polygon.envelope)
 
     // Test PiP
     let testCoordinate = Coordinate2D(x: 29.0, y: 13.0)
     print(polygon.contains(coordinate: testCoordinate))
 
     // Centroid should be within polygon
-    let centroid = polygon.centroid()
+    let centroid = polygon.centroid
     print(polygon.contains(coordinate: centroid))
 
     // Test equality of two coordinates
