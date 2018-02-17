@@ -10,36 +10,36 @@ import Foundation
 
 open class Polygon: Geometry, PlanarGeometry {
 
-    public private(set) var exteriorRing: LinearRing
-    public private(set) var interiorRings: [LinearRing]?
+    public let exteriorRing: LinearRing
+    public let interiorRings: [LinearRing]?
     
     public init (exteriorRing: LinearRing, interiorRings: [LinearRing]?) {
         self.exteriorRing = exteriorRing
         self.interiorRings = (interiorRings ?? []).isEmpty ? nil : interiorRings
     }
     
-    open func area() -> Double {
+    open private(set) lazy var area: Double = {
         // The area of a polygon is the area of the exterior ring subtracted by the areas of the
         // interior rings (which represent holes in the polygon by definition)
-        let exteriorArea = exteriorRing.area()
+        let exteriorArea = exteriorRing.area
         var interiorAreas = 0.0
         
         for ring in interiorRings ?? [] {
-            interiorAreas += ring.area()
+            interiorAreas += ring.area
         }
         
         return exteriorArea - interiorAreas
-    }
+    }()
     
-    open override func centroid() -> Coordinate2D {
+    override open private(set) lazy var centroid: Coordinate2D = {
         // Polygon's centroid is equal to the exterior ring's centroid (by definition)
-        return exteriorRing.centroid()
-    }
+        return exteriorRing.centroid
+    }()
     
-    open override func envelope() -> (Coordinate2D, Coordinate2D) {
+    override open private(set) lazy var envelope: (Coordinate2D, Coordinate2D) = {
         // Envelope of Polygon is defined by exterior ring (by definition)
-        return exteriorRing.envelope()
-    }
+        return exteriorRing.envelope
+    }()
     
     public func contains(coordinate: Coordinate2D) -> Bool {
         // The coordinate is considered to be within this geometry, if ALL of the

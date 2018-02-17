@@ -25,7 +25,7 @@ open class LinearRing: Geometry, PlanarGeometry {
         }
     }
     
-    open override func centroid() -> Coordinate2D {
+    override open private(set) lazy var centroid: Coordinate2D = {
         // cf. https://en.wikipedia.org/wiki/Centroid#Centroid_of_a_polygon
         
         // A closed Polygon must consist of at least four vertices in order to have an area.
@@ -48,13 +48,13 @@ open class LinearRing: Geometry, PlanarGeometry {
         let cy = sumy / (6.0 * area)
         
         return Coordinate2D(x: cx, y: cy)
-    }
+    }()
     
-    open func area() -> Double {
+    open private(set) lazy var area: Double = {
         return fabs(signedArea())
-    }
+    }()
     
-    open override func envelope() -> (Coordinate2D, Coordinate2D) {
+    override open private(set) lazy var envelope: (Coordinate2D, Coordinate2D) = {
         var minX: Double = 100000.0
         var minY: Double = 100000.0
         var maxX: Double = -100000.0
@@ -76,19 +76,17 @@ open class LinearRing: Geometry, PlanarGeometry {
         }
         
         return (Coordinate2D(x: minX, y: maxY), Coordinate2D(x: maxX, y: minY))
-    }
+    }()
     
     public func contains(coordinate: Coordinate2D) -> Bool {
         // The coordinate is considered to be within this geometry, if ALL of the
         // following conditions are met:
         // (1) The coordinate is within the bounding box (envelope) of this geometry
-        let envelopeBox = envelope()
-        
-        if coordinate.x < envelopeBox.0.x || coordinate.x > envelopeBox.1.x {
+        if coordinate.x < envelope.0.x || coordinate.x > envelope.1.x {
             return false
         }
         
-        if coordinate.y < envelopeBox.1.y || coordinate.y > envelopeBox.0.y {
+        if coordinate.y < envelope.1.y || coordinate.y > envelope.0.y {
             return false
         }
         

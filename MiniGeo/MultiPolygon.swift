@@ -13,34 +13,34 @@ open class MultiPolygon: GeometryCollection, PlanarGeometry {
         super.init(geometries: polygons)
     }
     
-    open func area() -> Double {
+    open private(set) lazy var area: Double = {
         // The area of a GeometryCollection is the sum of the areas of the contained geometries
         var totalArea: Double = 0.0
         
         for geometry in geometries {
-            totalArea += (geometry as! Polygon).area()
+            totalArea += (geometry as! Polygon).area
         }
         
         return totalArea
-    }
+    }()
     
-    open override func centroid() -> Coordinate2D {
+    override open private(set) lazy var centroid: Coordinate2D = {
         // The centroid of a GeometryCollection is defined as the average across all centroids of the contained geometries
         var sumx: Double = 0.0
         var sumy: Double = 0.0
         var nrCentroids: Double = 0.0
         
         for geometry in geometries {
-            let centroid: Coordinate2D = geometry.centroid()
+            let centroid: Coordinate2D = geometry.centroid
             sumx += centroid.x
             sumy += centroid.y
             nrCentroids += 1.0
         }
         
         return Coordinate2D(x: sumx / nrCentroids, y: sumy / nrCentroids)
-    }
+    }()
     
-    open override func envelope() -> (Coordinate2D, Coordinate2D) {
+    override open private(set) lazy var envelope: (Coordinate2D, Coordinate2D) = {
         // Envelope is defined by the envelopes of the contained polygons.
         var minX: Double = 100000.0
         var minY: Double = 100000.0
@@ -48,7 +48,7 @@ open class MultiPolygon: GeometryCollection, PlanarGeometry {
         var maxY: Double = -100000.0
         
         for polygon in geometries {
-            let envelopeBox = polygon.envelope()
+            let envelopeBox = polygon.envelope
         
             if envelopeBox.0.x < minX {
                 minX = envelopeBox.0.x
@@ -65,13 +65,13 @@ open class MultiPolygon: GeometryCollection, PlanarGeometry {
         }
         
         return (Coordinate2D(x: minX, y: maxY), Coordinate2D(x: maxX, y: minY))
-    }
+    }()
     
     public func contains(coordinate: Coordinate2D) -> Bool {
         // Coordinate is considered to be within, if ALL of the following conditions are met:
         
         // (1) Coordinate is within the envelope of this geometry
-        let envelopeBox = envelope()
+        let envelopeBox = envelope
         
         if coordinate.x < envelopeBox.0.x || coordinate.x > envelopeBox.1.x {
             return false
