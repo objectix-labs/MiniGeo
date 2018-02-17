@@ -17,6 +17,7 @@
 * Supported Geometries: LinearRing, Polygon, MultiPolygon
 * WKT Parsing of POLYGON and MULTIPOLYGON
 * Fast Point-in-Polygon (PiP) test
+* Quad Tree implementation for efficient geometry lookup by a given coordinate (eg. for performing very fast hit test on large geometry sets)
 * Geometry calculations: envelope, area and centroid
 * Coordinate equality (two coordinates are considered equal if difference per component is less than 0.000001)
 * MapKit support (through extensions)
@@ -63,6 +64,25 @@ if let polygon = Geometry.create(fromWKT: wktString) as? Polygon {
     // Test equality of two coordinates
     let testCoordinate2 = Coordinate2D(x: 29.0, y: 13.0)
     print(testCoordinate2.equals(coordinate: testCoordinate))
+
+    /*
+        Accelerated hit testing with Quad Tree.
+        Performance tests with randomized data set of 10000 geometries with 10000 random coordinate 
+        lookups indicates an acceleration factor of 70 and more! YMMV
+    */
+    let veryLargeGeometrySet: Set<Geometry> = ...
+
+    // Initialize quad tree for data set (done only once for a given set!)
+    let quadTree = QuadTree()
+    quadTree.build(from: veryLargeGeometrySet)
+
+    // Lookup "nearby" geometries for test coordinate
+    let proximityGeometries = quadTree.fetch(for: testCoordinate)
+
+    // Perform hit test with candidate geometries (rather than all geometries in data set)
+    for geometry in proximityGeometries {
+        print(geometry.contains(coordinate: testCoordinate))
+    }
 }
 ```
 
