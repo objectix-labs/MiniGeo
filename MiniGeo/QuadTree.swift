@@ -8,15 +8,21 @@
 
 import Foundation
 
-open class QuadTree {
+public class QuadTree {
     
+    // The current depth of this tree
+    public private(set) var depth: Int = 0
+    
+    // The number of nodes in this tree
+    public private(set) var nodeCount: Int = 0
+
     // Contains the root node of the tree (if set)
     private var root: QuadTreeNode?
     
     // (Re-)builds the quad tree from the specified ROIs
-    open func build(from rois: Set<Geometry>) {
-        maxDepth = 0
-        nrNodes = 1
+    public func build(from geometries: Set<Geometry>) {
+        depth = 0
+        nodeCount = 1
         
         // Optimization: to save a few levels in tree, we limit the Quadtree to the bounding box of the specified ROIs.
         var minLat: Double = 1000.0
@@ -24,7 +30,7 @@ open class QuadTree {
         var maxLat: Double = -1000.0
         var maxLong: Double = -1000.0
         
-        for roi in rois {
+        for roi in geometries {
             let boundingBox = roi.envelope
             if boundingBox.0.x < minLong {
                 minLong = boundingBox.0.x
@@ -51,15 +57,15 @@ open class QuadTree {
         self.root = QuadTreeNode(quad: worldGeometry)
         
         // Kick off recursion
-        quadStep(node: self.root!, relevantROIs: rois, depth: 1)
+        quadStep(node: self.root!, relevantROIs: geometries, depth: 1)
         
         // Print some tree statistics
-        debugPrint("Quadtree contains \(nrNodes) nodes distributed over \(maxDepth) levels.")
+        debugPrint("Quadtree contains \(nodeCount) nodes distributed over \(depth) levels.")
         debugPrint("Bounding Box of Quadtree is (\(minLong), \(minLat), \(maxLong), \(maxLat))")
     }
     
     // Delivers the ROIs for the specified coordinate (or an empty set, if no ROIs were present)
-    open func fetch(for coordinate: Coordinate2D) -> Set<Geometry> {
+    public func fetch(for coordinate: Coordinate2D) -> Set<Geometry> {
         if root == nil {
             // Quad tree not built yet -> no ROIs can be found
             return Set<Geometry>()
@@ -68,7 +74,7 @@ open class QuadTree {
         // Start search from root node and perform directed search to reach leaf node that contains the specified location.
         if let result = searchStep(quad: self.root!, location: coordinate) {
             // We found the quad tree leaf node, that contains the coordinate. Return the ROIs attached to that node as result
-            return result.rois ?? Set<Geometry>()
+            return result.geometries ?? Set<Geometry>()
         } else {
             // We were not able to find a quad tree node that contains the location. In that case, we return an empty result.
             return Set<Geometry>()
@@ -80,8 +86,8 @@ open class QuadTree {
     // Processes a single quad tree node by dividing the quad into four subquads, recursively callinf itself with each new node, or terminating recursion if the
     // specified quad tree node did not contain at least one ROI
     private func quadStep(node: QuadTreeNode, relevantROIs: Set<Geometry>, depth: Int) {
-        if depth > maxDepth {
-            maxDepth = depth
+        if depth > self.depth {
+            self.depth = depth
         }
         
         // We first check, what ROIs (from the relevant ones) are contained in this quad.
@@ -97,7 +103,7 @@ open class QuadTree {
         
         // If we did not find a contained ROI, we can terminate recursion here
         if containedROIs.isEmpty {
-            node.rois = Set<Geometry>() // Current node becomes leaf node with no ROIs
+            node.geometries = Set<Geometry>() // Current node becomes leaf node with no ROIs
             node.childNodes = nil
             return  // End of recursion
         }
@@ -105,7 +111,7 @@ open class QuadTree {
         // Special case: if the current quad contains only one ROI, we do not need to further refine that quad, as a further refinement would not result into smaller partitions of
         // ROIs anyways.
         if containedROIs.count == 1 {
-            node.rois = containedROIs
+            node.geometries = containedROIs
             node.childNodes = nil
             return  // End of recursion
         }
@@ -118,7 +124,7 @@ open class QuadTree {
         // Depending on latitude, the set logitude threshold equals to a range of 50 and 100 meters (cf. https://en.wikipedia.org/wiki/Geographic_coordinate_system), while the
         // latitude threshold equals to roughly 112 meters
         if fabs(dlat) < 0.001 || fabs(dlong) < 0.001 {
-            node.rois = containedROIs
+            node.geometries = containedROIs
             node.childNodes = nil
             return
         }
@@ -152,7 +158,7 @@ open class QuadTree {
         quadStep(node: node3, relevantROIs: containedROIs, depth: depth+1)
         quadStep(node: node4, relevantROIs: containedROIs, depth: depth+1)
         
-        nrNodes += 4
+        nodeCount += 4
     }
     
     // Performs a recursive directed search on the specified node. Returns the quad tree leaf node that contains the location
@@ -228,9 +234,6 @@ open class QuadTree {
     private func valueInRange(value: Double, min: Double, max: Double) -> Bool {
         return (value >= min) && (value <= max)
     }
-    
-    private var maxDepth: Int = 0
-    private var nrNodes: Int = 0
 }
 
 fileprivate class QuadTreeNode {
@@ -242,7 +245,7 @@ fileprivate class QuadTreeNode {
     var quad: QuadGeometry
     
     // The region of interests stored for this quad. For sake of memory efficiency, only leaf nodes have this member set properly.
-    var rois: Set<Geometry>?
+    var geometries: Set<Geometry>?
     
     // The four child nodes of this node (if available). Leaf nodes do not have this member set.
     var childNodes: (QuadTreeNode, QuadTreeNode, QuadTreeNode, QuadTreeNode)?

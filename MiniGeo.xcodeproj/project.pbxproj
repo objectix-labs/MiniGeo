@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8374C5872038A26A0035A62A /* QuadTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8374C5862038A26A0035A62A /* QuadTree.swift */; };
+		8374C5892038A75D0035A62A /* QuadTreeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8374C5882038A75D0035A62A /* QuadTreeTests.swift */; };
 		83EC21272035CA62002AA249 /* MiniGeo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83EC211D2035CA62002AA249 /* MiniGeo.framework */; };
 		83EC212C2035CA62002AA249 /* MiniGeoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EC212B2035CA62002AA249 /* MiniGeoTests.swift */; };
 		83EC212E2035CA62002AA249 /* MiniGeo.h in Headers */ = {isa = PBXBuildFile; fileRef = 83EC21202035CA62002AA249 /* MiniGeo.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -39,6 +40,7 @@
 
 /* Begin PBXFileReference section */
 		8374C5862038A26A0035A62A /* QuadTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuadTree.swift; sourceTree = "<group>"; };
+		8374C5882038A75D0035A62A /* QuadTreeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuadTreeTests.swift; sourceTree = "<group>"; };
 		83EC211D2035CA62002AA249 /* MiniGeo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MiniGeo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83EC21202035CA62002AA249 /* MiniGeo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MiniGeo.h; sourceTree = "<group>"; };
 		83EC21212035CA62002AA249 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 		83EC212A2035CA62002AA249 /* MiniGeoTests */ = {
 			isa = PBXGroup;
 			children = (
+				8374C5882038A75D0035A62A /* QuadTreeTests.swift */,
 				83EC212B2035CA62002AA249 /* MiniGeoTests.swift */,
 				83EC212D2035CA62002AA249 /* Info.plist */,
 				83EC21482035DB07002AA249 /* WKTParsingTests.swift */,
@@ -286,6 +289,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8374C5892038A75D0035A62A /* QuadTreeTests.swift in Sources */,
 				83EC212C2035CA62002AA249 /* MiniGeoTests.swift in Sources */,
 				83EC214B2036D94E002AA249 /* GeometryTests.swift in Sources */,
 				83EC21492035DB07002AA249 /* WKTParsingTests.swift in Sources */,
