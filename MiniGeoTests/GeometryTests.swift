@@ -28,11 +28,11 @@ class GeometryTests: XCTestCase {
         let ring: LinearRing = LinearRing(coordinates: points)
         
         // Test area
-        let area = ring.area()
+        let area = ring.area
         XCTAssertTrue(area == 200.0)
         
         // Test centroid
-        let centroid = ring.centroid()
+        let centroid = ring.centroid
         XCTAssertTrue(centroid.x == 10.0)
         XCTAssertEqual(centroid.y, 6.667, accuracy: 0.001, "Y coordinate of centroid must match")
         
@@ -42,6 +42,9 @@ class GeometryTests: XCTestCase {
         
         let notContained = ring.contains(coordinate: Coordinate2D(x: 1, y: 15))
         XCTAssertFalse(notContained)
+        
+        // Centroid should be within polygon
+        XCTAssertTrue(ring.contains(coordinate: centroid))
     }
     
     func testLinearRingClosing() {
@@ -81,11 +84,11 @@ class GeometryTests: XCTestCase {
         let polygon: Polygon = Polygon(exteriorRing: ring, interiorRings: nil)
         
         // Test area
-        let area = polygon.area()
+        let area = polygon.area
         XCTAssertTrue(area == 200.0)
         
         // Test centroid
-        let centroid = polygon.centroid()
+        let centroid = polygon.centroid
         XCTAssertTrue(centroid.x == 10.0)
         XCTAssertEqual(centroid.y, 6.667, accuracy: 0.001, "Y coordinate of centroid must match")
         
@@ -95,6 +98,9 @@ class GeometryTests: XCTestCase {
         
         let notContained = polygon.contains(coordinate: Coordinate2D(x: 1, y: 15))
         XCTAssertFalse(notContained)
+        
+        // Centroid should be within polygon
+        XCTAssertTrue(polygon.contains(coordinate: centroid))
     }
     
     func testSimpleMultiPolygon() {
@@ -109,11 +115,11 @@ class GeometryTests: XCTestCase {
         let multiPolygon: MultiPolygon = MultiPolygon(polygons: [polygon1, polygon2])
         
         // Test area
-        let area = multiPolygon.area()
+        let area = multiPolygon.area
         XCTAssertTrue(area == 400.0)
         
         // Test centroid
-        let centroid = multiPolygon.centroid()
+        let centroid = multiPolygon.centroid
         XCTAssertEqual(centroid.x, 0, accuracy: 0.001, "X coordinate of centroid must match")
         XCTAssertEqual(centroid.y, 0, accuracy: 0.001, "Y coordinate of centroid must match")
         
@@ -123,6 +129,9 @@ class GeometryTests: XCTestCase {
         
         let notContained = multiPolygon.contains(coordinate: Coordinate2D(x: 1, y: 15))
         XCTAssertFalse(notContained)
+        
+        // Centroid should be within multi polygon
+        XCTAssertTrue(multiPolygon.contains(coordinate: centroid))
     }
     
 }

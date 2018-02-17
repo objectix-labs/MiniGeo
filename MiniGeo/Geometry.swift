@@ -10,16 +10,14 @@ import Foundation
 
 // Defines the interface for planar geometry objects such as Polygons, MultiPolygons and LinarRings
 public protocol PlanarGeometry {
-    
+    // Returns the absolute area for this Geometry. This is 0 for all geometries besides Polygon, MultiPolygon and LinearRing.
+    var area: Double { get }
+
     // Tests, whether the specifiec coordinates is within the bounds of the geometry.
     func contains(coordinate: Coordinate2D) -> Bool
-    
-    // Calculates the absolute area for this Geometry. This is 0 for all geometries besides Polygon, MultiPolygon and LinearRing.
-    func area() -> Double
 }
 
-open class Geometry {
-    
+open class Geometry: Hashable {
     // Creates a Geometry instance from the specified WKT string. Returns nil, if WKT string could not be parsed successfully.
     open class func create(fromWKT input: String) -> Geometry? {
         let wktReader: WKTReader = WKTReader()
@@ -27,12 +25,20 @@ open class Geometry {
     }
     
     // Calculates the centroid for this Geometry.
-    open func centroid() -> Coordinate2D {
+    open private(set) lazy var centroid: Coordinate2D = {
         fatalError("centroid() on Geometry is not implemented. Call subclass implementation instead.")
-    }
+    }()
     
     // Calculates the bounding box (envelope) of the geometry. Returned tuple is (topLeftCoordinate, bottomRightCoordinate).
-    open func envelope() -> (Coordinate2D, Coordinate2D) {
+    open private(set) lazy var envelope: (Coordinate2D, Coordinate2D) = {
         fatalError("envelope() on Geometry is not implemented. Call subclass implementation instead.")
+    }()
+    
+    public var hashValue: Int {
+        return ObjectIdentifier(self).hashValue
+    }
+    
+    public static func ==(lhs: Geometry, rhs: Geometry) -> Bool {
+        return ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
     }
 }
