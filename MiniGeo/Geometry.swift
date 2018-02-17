@@ -17,8 +17,7 @@ public protocol PlanarGeometry {
     func contains(coordinate: Coordinate2D) -> Bool
 }
 
-open class Geometry {
-    
+open class Geometry: Hashable {
     // Creates a Geometry instance from the specified WKT string. Returns nil, if WKT string could not be parsed successfully.
     open class func create(fromWKT input: String) -> Geometry? {
         let wktReader: WKTReader = WKTReader()
@@ -34,4 +33,12 @@ open class Geometry {
     open private(set) lazy var envelope: (Coordinate2D, Coordinate2D) = {
         fatalError("envelope() on Geometry is not implemented. Call subclass implementation instead.")
     }()
+    
+    public var hashValue: Int {
+        return ObjectIdentifier(self).hashValue
+    }
+    
+    public static func ==(lhs: Geometry, rhs: Geometry) -> Bool {
+        return ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
+    }
 }
