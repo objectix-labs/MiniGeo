@@ -19,6 +19,10 @@ public class QuadTree {
     // Contains the root node of the tree (if set)
     private var root: QuadTreeNode?
     
+    public init() {
+        
+    }
+    
     // (Re-)builds the quad tree from the specified ROIs
     public func build(from geometries: Set<Geometry>) {
         depth = 0
