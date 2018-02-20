@@ -32,7 +32,7 @@
 ## Installation
 Please add the framework via your `Cartfile`:
 ```bash
-github "objectix-labs/MiniGeo" "0.2.0"
+github "objectix-labs/MiniGeo" "0.2.1"
 ```
 
 If you feel adventurous you can also use the latest development snapshot instead:
