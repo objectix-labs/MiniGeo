@@ -24,7 +24,7 @@
 * CoreLocation support (through extensions)
 
 ## System Requirements
-* XCode 9+
+* XCode 9.4+
 * Swift 4.1+
 * Carthage
 * iOS 9.0+
@@ -32,7 +32,7 @@
 ## Installation
 Please add the framework via your `Cartfile`:
 ```bash
-github "objectix-labs/MiniGeo" "0.2.0"
+github "objectix-labs/MiniGeo" "0.3.0"
 ```
 
 If you feel adventurous you can also use the latest development snapshot instead:
