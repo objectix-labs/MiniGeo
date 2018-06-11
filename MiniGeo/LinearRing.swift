@@ -25,7 +25,11 @@ open class LinearRing: Geometry, PlanarGeometry {
         }
     }
     
-    override open private(set) lazy var centroid: Coordinate2D = {
+    open override var centroid: Coordinate2D {
+        return _centroid
+    }
+    
+    private lazy var _centroid: Coordinate2D = {
         // cf. https://en.wikipedia.org/wiki/Centroid#Centroid_of_a_polygon
         
         // A closed Polygon must consist of at least four vertices in order to have an area.
@@ -54,7 +58,11 @@ open class LinearRing: Geometry, PlanarGeometry {
         return fabs(signedArea())
     }()
     
-    override open private(set) lazy var envelope: (Coordinate2D, Coordinate2D) = {
+    open override var envelope: (Coordinate2D, Coordinate2D) {
+        return _envelope
+    }
+    
+    private lazy var _envelope: (Coordinate2D, Coordinate2D) = {
         var minX: Double = 100000.0
         var minY: Double = 100000.0
         var maxX: Double = -100000.0

@@ -25,14 +25,14 @@ open class Geometry: Hashable {
     }
     
     // Calculates the centroid for this Geometry.
-    open private(set) lazy var centroid: Coordinate2D = {
+    open var centroid: Coordinate2D {
         fatalError("centroid() on Geometry is not implemented. Call subclass implementation instead.")
-    }()
+    }
     
     // Calculates the bounding box (envelope) of the geometry. Returned tuple is (topLeftCoordinate, bottomRightCoordinate).
-    open private(set) lazy var envelope: (Coordinate2D, Coordinate2D) = {
+    open var envelope: (Coordinate2D, Coordinate2D) {
         fatalError("envelope() on Geometry is not implemented. Call subclass implementation instead.")
-    }()
+    }
     
     public var hashValue: Int {
         return ObjectIdentifier(self).hashValue

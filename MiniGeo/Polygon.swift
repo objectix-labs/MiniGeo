@@ -31,12 +31,20 @@ open class Polygon: Geometry, PlanarGeometry {
         return exteriorArea - interiorAreas
     }()
     
-    override open private(set) lazy var centroid: Coordinate2D = {
+    open override var centroid: Coordinate2D {
+        return _centroid
+    }
+    
+    private lazy var _centroid: Coordinate2D = {
         // Polygon's centroid is equal to the exterior ring's centroid (by definition)
         return exteriorRing.centroid
     }()
     
-    override open private(set) lazy var envelope: (Coordinate2D, Coordinate2D) = {
+    open override var envelope: (Coordinate2D, Coordinate2D) {
+        return _envelope
+    }
+    
+    private lazy var _envelope: (Coordinate2D, Coordinate2D) = {
         // Envelope of Polygon is defined by exterior ring (by definition)
         return exteriorRing.envelope
     }()

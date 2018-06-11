@@ -24,7 +24,11 @@ open class MultiPolygon: GeometryCollection, PlanarGeometry {
         return totalArea
     }()
     
-    override open private(set) lazy var centroid: Coordinate2D = {
+    open override var centroid: Coordinate2D {
+        return _centroid
+    }
+    
+    private lazy var _centroid: Coordinate2D = {
         // The centroid of a GeometryCollection is defined as the average across all centroids of the contained geometries
         var sumx: Double = 0.0
         var sumy: Double = 0.0
@@ -40,7 +44,11 @@ open class MultiPolygon: GeometryCollection, PlanarGeometry {
         return Coordinate2D(x: sumx / nrCentroids, y: sumy / nrCentroids)
     }()
     
-    override open private(set) lazy var envelope: (Coordinate2D, Coordinate2D) = {
+    open override var envelope: (Coordinate2D, Coordinate2D) {
+        return _envelope
+    }
+    
+    private lazy var _envelope: (Coordinate2D, Coordinate2D) = {
         // Envelope is defined by the envelopes of the contained polygons.
         var minX: Double = 100000.0
         var minY: Double = 100000.0
