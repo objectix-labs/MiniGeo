@@ -37,7 +37,8 @@ github "objectix-labs/MiniGeo" "0.4.0"
 
 For XCode 9.0 and Swift 4.1 add the following to your `Cartfile`:
 ```bash
-guthub "objectix-labs/MiniGeo" "0.3.0"
+github "objectix-labs/MiniGeo" "0.3.0"
+````
 
 If you feel adventurous you can also use the latest development snapshot instead:
 ```bash
