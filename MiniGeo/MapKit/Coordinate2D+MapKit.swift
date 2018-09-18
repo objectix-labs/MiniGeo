@@ -12,12 +12,12 @@ import MapKit
 public extension Coordinate2D {
     
     public convenience init(mapkitPoint: MKMapPoint) {
-        self.init(coreLocationCoordinate: MKCoordinateForMapPoint(mapkitPoint))
+        self.init(coreLocationCoordinate: mapkitPoint.coordinate)
     }
     
     // Returns a MapKit Point for the given coordinate
     public func mapkitPoint() -> MKMapPoint {
-        return MKMapPointForCoordinate(coreLocationCoordinate())
+        return MKMapPoint.init(coreLocationCoordinate())
     }
     
     // Checks whether this coordinate is equal to the specified Mapkit point
