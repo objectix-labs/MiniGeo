@@ -71,8 +71,8 @@ class GeometryTests: XCTestCase {
         XCTAssertTrue(coordinate1.equals(coreLocationCoordinate: coreLocationCoordinate1))
         XCTAssertFalse(coordinate1.equals(coreLocationCoordinate: coreLocationCoordinate2))
 
-        let mapkitPoint1: MKMapPoint = MKMapPointForCoordinate(coreLocationCoordinate1)
-        let mapkitPoint2: MKMapPoint = MKMapPointForCoordinate(coreLocationCoordinate2)
+        let mapkitPoint1: MKMapPoint = MKMapPoint.init(coreLocationCoordinate1)
+        let mapkitPoint2: MKMapPoint = MKMapPoint.init(coreLocationCoordinate2)
         
         XCTAssertTrue(coordinate1.equals(mapkitPoint: mapkitPoint1))
         XCTAssertFalse(coordinate1.equals(mapkitPoint: mapkitPoint2))
