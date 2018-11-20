@@ -25,14 +25,14 @@
 
 ## System Requirements
 * XCode 10+
-* Swift 4.2+
+* Swift 4.2.1+
 * Carthage
 * iOS 9.0+
 
 ## Installation
 Please add the framework via your `Cartfile`:
 ```bash
-github "objectix-labs/MiniGeo" "0.4.0"
+github "objectix-labs/MiniGeo" "0.4.1"
 ```
 
 For XCode 9.0 and Swift 4.1 add the following to your `Cartfile`:
