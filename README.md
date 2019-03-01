@@ -16,7 +16,7 @@
 * Compatible with Carthage
 * Supported Geometries: LinearRing, Polygon, MultiPolygon
 * WKT Parsing of POLYGON and MULTIPOLYGON
-* Fast Point-in-Polygon (PiP) test
+* Fast Point-in-Polygon (PiP) test, with and without exclusion of holes
 * Quad Tree implementation for efficient geometry lookup by a given coordinate (eg. for performing very fast hit test on large geometry sets)
 * Geometry calculations: envelope, area and centroid
 * Coordinate equality (two coordinates are considered equal if difference per component is less than 0.000001)
@@ -32,7 +32,7 @@
 ## Installation
 Please add the framework via your `Cartfile`:
 ```bash
-github "objectix-labs/MiniGeo" "0.4.1"
+github "objectix-labs/MiniGeo" "0.5.0"
 ```
 
 For XCode 9.0 and Swift 4.1 add the following to your `Cartfile`:
@@ -87,6 +87,9 @@ if let polygon = Geometry.create(fromWKT: wktString) as? Polygon {
     // Perform hit test with candidate geometries (rather than all geometries in data set)
     for geometry in proximityGeometries {
         print(geometry.contains(coordinate: testCoordinate))
+
+        // Perform hit test limited to exterior boundary of polygon (ie. without any "holes")
+        print(geometry.contains(coordinate: testCoordinate, limitToExteriorBoundary: true))
     }
 }
 ```
