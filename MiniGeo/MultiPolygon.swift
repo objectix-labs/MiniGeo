@@ -76,6 +76,10 @@ open class MultiPolygon: GeometryCollection, PlanarGeometry {
     }()
     
     public func contains(coordinate: Coordinate2D) -> Bool {
+        return contains(coordinate: coordinate, limitToExteriorBoundary: false)
+    }
+    
+    public func contains(coordinate: Coordinate2D, limitToExteriorBoundary: Bool = false) -> Bool {
         // Coordinate is considered to be within, if ALL of the following conditions are met:
         
         // (1) Coordinate is within the envelope of this geometry
@@ -91,7 +95,7 @@ open class MultiPolygon: GeometryCollection, PlanarGeometry {
         
         // (2) Coordinate is in at least one of the contained polygons
         for polygon in geometries {
-            if (polygon as! Polygon).contains(coordinate: coordinate) {
+            if (polygon as! Polygon).contains(coordinate: coordinate, limitToExteriorBoundary: limitToExteriorBoundary) {
                 return true
             }
         }

@@ -50,18 +50,24 @@ open class Polygon: Geometry, PlanarGeometry {
     }()
     
     public func contains(coordinate: Coordinate2D) -> Bool {
+        return contains(coordinate: coordinate, limitToExteriorBoundary: false)
+    }
+    
+    public func contains(coordinate: Coordinate2D, limitToExteriorBoundary: Bool = false) -> Bool {
         // The coordinate is considered to be within this geometry, if ALL of the
         // following conditions are met:
         // (1) The coordinate is within the exterior ring
         if !exteriorRing.contains(coordinate: coordinate) {
             return false
         }
-
-        // (2) The coordinate is NOT in any of the interior rings
-        for ring in interiorRings ?? [] {
-            if ring.contains(coordinate: coordinate) {
-                // Coordinate is within a hole of this polygon
-                return false
+        
+        // (2) The coordinate is NOT in any of the interior rings (if boolean flag is set to false)
+        if !limitToExteriorBoundary {
+            for ring in interiorRings ?? [] {
+                if ring.contains(coordinate: coordinate) {
+                    // Coordinate is within a hole of this polygon
+                    return false
+                }
             }
         }
         

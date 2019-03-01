@@ -13,7 +13,7 @@ public protocol PlanarGeometry {
     // Returns the absolute area for this Geometry. This is 0 for all geometries besides Polygon, MultiPolygon and LinearRing.
     var area: Double { get }
 
-    // Tests, whether the specifiec coordinates is within the bounds of the geometry.
+    // Tests, whether the specific coordinates is within the bounds of the geometry.
     func contains(coordinate: Coordinate2D) -> Bool
 }
 
