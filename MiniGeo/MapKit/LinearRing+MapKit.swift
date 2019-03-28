@@ -12,7 +12,7 @@ import MapKit
 public extension LinearRing {
     
     // Initializes a ring from a list of MKMapPoints.
-    public convenience init(mapkitPoints: [MKMapPoint]) {
+    convenience init(mapkitPoints: [MKMapPoint]) {
         assert(!mapkitPoints.isEmpty)
         
         self.init(coordinates: mapkitPoints.map({ (mapPoint) -> Coordinate2D in
@@ -21,7 +21,7 @@ public extension LinearRing {
     }
     
     // Initializes a ring from a MapKit Polygon (using its exterior boundary only).
-    public convenience init(mapkitPolygon: MKPolygon) {
+    convenience init(mapkitPolygon: MKPolygon) {
         let points: [Coordinate2D] = Array(UnsafeBufferPointer(start: mapkitPolygon.points(), count: mapkitPolygon.pointCount)).map { (mapkitPoint) -> Coordinate2D in
             return Coordinate2D(mapkitPoint: mapkitPoint)
         }
@@ -30,14 +30,14 @@ public extension LinearRing {
     }
     
     // Returns the coordinates of this geometry as MapKit points.
-    public func mapkitPoints() -> [MKMapPoint] {
+    func mapkitPoints() -> [MKMapPoint] {
         return coordinates.map { (coordinate) -> MKMapPoint in
             return coordinate.mapkitPoint()
         }
     }
     
     // Creates a MKPolygon shape from this geometry
-    public func mapkitPolygon() -> MKPolygon {
+    func mapkitPolygon() -> MKPolygon {
         let points: [MKMapPoint] = mapkitPoints()
         return MKPolygon(points: UnsafePointer<MKMapPoint>(points), count: points.count)
     }

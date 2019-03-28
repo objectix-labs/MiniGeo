@@ -34,8 +34,8 @@ open class Geometry: Hashable {
         fatalError("envelope() on Geometry is not implemented. Call subclass implementation instead.")
     }
     
-    public var hashValue: Int {
-        return ObjectIdentifier(self).hashValue
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(ObjectIdentifier(self).hashValue)
     }
     
     public static func ==(lhs: Geometry, rhs: Geometry) -> Bool {
