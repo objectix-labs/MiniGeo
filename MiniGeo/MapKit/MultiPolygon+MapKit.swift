@@ -12,7 +12,7 @@ import MapKit
 public extension MultiPolygon {
     
     // Initializes MultiPolygon from a list of polygons.
-    public convenience init(mapkitPolygons: [MKPolygon]) {
+    convenience init(mapkitPolygons: [MKPolygon]) {
         assert(!mapkitPolygons.isEmpty)
         
         self.init(polygons: mapkitPolygons.map({ (mapkitPolygon) -> Polygon in
@@ -20,7 +20,7 @@ public extension MultiPolygon {
         }))
     }
     
-    public func mapkitPolygons() -> [MKPolygon] {
+    func mapkitPolygons() -> [MKPolygon] {
         return geometries.map({ (geometry) -> MKPolygon in
             return (geometry as! Polygon).mapkitPolygon()
         })
