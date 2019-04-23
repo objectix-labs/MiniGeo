@@ -24,15 +24,15 @@
 * CoreLocation support (through extensions)
 
 ## System Requirements
-* XCode 10.2
-* Swift 5.0 (older Swift versions available, please see below)
+* XCode 10.2.1
+* Swift 5.0.1 (older Swift versions available, please see below)
 * Carthage
 * iOS 9.0+
 
 ## Installation
 Please add the framework via your `Cartfile`:
 ```bash
-github "objectix-labs/MiniGeo" "0.6.0"
+github "objectix-labs/MiniGeo" "0.6.1"
 ```
 
 For XCode 10.0/10.1 and Swift 4.2 add the following to your `Cartfile`:
